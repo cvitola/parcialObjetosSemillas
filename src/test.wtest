@@ -1,0 +1,41 @@
+import inta.*
+import parcelas.*
+import plantas.*
+
+describe "Pruebas del parcial" {
+	
+	const menta1 = new Menta(anioObtencion=2005, altura=1)
+	const menta2 = new Menta(anioObtencion=2020, altura=0.3)
+	const soja1 = new Soja(anioObtencion=2009, altura=0.6)
+	const soja2 = new Soja(anioObtencion=2015, altura=1)
+	const quinoa1 = new Quinoa(anioObtencion=2010, altura=0.2, horasSolTolera=12)
+	const quinoa2 = new Quinoa(anioObtencion=2001, altura=0.2, horasSolTolera=9)
+	const transg = new SojaTransgenica(anioObtencion=2010, altura=0.5)
+	const hierba = new HierbaBuena(anioObtencion=2009, altura=0.9)
+	
+	const eco = new Ecologica(largo=5, ancho=8, horasSol=8)
+	
+	test "Menta de 1 metro deberia dar semillas y ocupar 3 metros cuadrados"{
+		assert.that(menta1.daNuevasSemillas())
+		assert.equals(menta1.espacioOcupa(),3)
+	}
+	
+	test "Soja de 0.6 metros y semilla 2009 tolerancia al sol 7, no daria semillas y ocuparia 0.3"{
+		assert.that(!soja1.daNuevasSemillas())
+		assert.equals(soja1.horasSolTolera(),7)
+		assert.equals(soja1.espacioOcupa(),0.3)
+	}
+	
+	test "quinoa que tolera 12hs y semilla 2010 da semillas"{
+		assert.that(quinoa1.daNuevasSemillas())
+	}
+	
+	test "Superficie de eco deberia ser 40"{
+		assert.equals(eco.superficie(),40)
+	}
+	
+	test "plantar Planta en parcela vacia OK"{
+		eco.agregarPlanta(menta1)
+		assert.equals(eco.cantidadPlantas(),1)
+	}
+}
