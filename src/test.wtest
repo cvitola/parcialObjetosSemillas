@@ -38,4 +38,15 @@ describe "Pruebas del parcial" {
 		eco.agregarPlanta(menta1)
 		assert.equals(eco.cantidadPlantas(),1)
 	}
+	
+	test "Promedio plantas por parcela con coleccion vacia deberia dar 0"{
+		assert.equals(inta.promedioPlantas(),0)
+	}
+	
+	test "promedio plantas por parcela con 1 coleccion con 3 plantas deberia dar 3"{
+		eco.agregarPlanta(menta1)
+		eco.agregarPlanta(menta2)
+		eco.agregarPlanta(quinoa1)
+		assert.equals(inta.promedioPlantas(),3)
+	}
 }
